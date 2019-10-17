@@ -17,18 +17,28 @@ export default class MovieList extends Component {
       .catch(err => console.log(err.response));
   }
 
+  // deleteMovie = () => {
+  //   axios.delete(`http://localhost:5000/api/movies/${this.props.match.params.id}`)
+  //     .then(response => {
+  //       console.log(response);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     })
+  // }
+
   render() {
     return (
       <div className="movie-list">
         {this.state.movies.map(movie => (
-          <MovieDetails key={movie.id} movie={movie} />
+          <MovieDetails key={movie.id} movie={movie} deleteMovie={this.deleteMovie} />
         ))}
       </div>
     );
   }
 }
 
-function MovieDetails({ movie }) {
+function MovieDetails({ movie, deleteMovie }) {
   return (
     <Link to={`/movies/${movie.id}`}>
       <MovieCard movie={movie} />
